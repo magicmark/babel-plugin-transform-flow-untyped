@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`examples pass tests 1`] = `
+"// @flow
+
+type Customer = {
+  id: number,
+  name: string
+};
+
+const helloWorld: string = \\"Hello World\\";
+const numberOver: number = 9000;
+const bears: boolean = false;
+
+const getCustomer: (number, string, any) => Customer = (
+  id: number,
+  name: string,
+  msg: any
+): Customer => {
+  console.log(msg);
+  return { id, name };
+};
+
+const customer: Customer = getCustomer(1, \\"Alice\\", \\"Untyped Param\\");
+"
+`;

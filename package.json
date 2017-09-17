@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.54.1",
-    "flow-parser": "^0.54.1"
+    "flow-parser": "^0.54.1",
+    "jest": "^21.1.0"
   },
   "dependencies": {
-    "babel-types": "^6.26.0"
+    "babel-types": "^6.26.0",
+    "mz": "^2.7.0",
+    "prettier": "^1.7.0"
   }
 }
