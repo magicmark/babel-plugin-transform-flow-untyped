@@ -3,14 +3,19 @@
 exports[`examples pass tests 1`] = `
 "// @flow
 
+const helloWorld: string = \\"Helo World\\";
+const numberOver: number = 9000;
+const bears: boolean = false;
+"
+`;
+
+exports[`examples pass tests 2`] = `
+"// @flow
+
 type Customer = {
   id: number,
   name: string
 };
-
-const helloWorld: string = \\"Hello World\\";
-const numberOver: number = 9000;
-const bears: boolean = false;
 
 const getCustomer: (number, string, any) => Customer = (
   id: number,
