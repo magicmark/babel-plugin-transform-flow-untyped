@@ -17,6 +17,11 @@ const getTypeAnnotation = (node: any, expectedTypes: any[]) => {
     return t.booleanTypeAnnotation();
   }
 
+  if (t.isIdentifier(node)) {
+    // todo: construct new annotion type
+    return identifiers[node.name].typeAnnotation.typeAnnotation;
+  }
+
   if (t.isArrowFunctionExpression(node)) {
     // make sure arguments are typed
     node.params.forEach(param => {
@@ -31,13 +36,11 @@ const getTypeAnnotation = (node: any, expectedTypes: any[]) => {
       node.returnType = t.typeAnnotation(bodyRetType);
     }
 
-    // todo: construct new annotion type :/
+    // todo: construct new annotion type
     return t.functionTypeAnnotation(
       null,
-      //t.typeParameterDeclaration([t.typeParameter(t.booleanTypeAnnotation())]),
-      // todo: copy typeAnnotation
+      // todo: make new typeAnnotation
       node.params.map(p => p.typeAnnotation.typeAnnotation),
-      //[t.booleanTypeAnnotation()],
       null,
       node.returnType.typeAnnotation
     );
@@ -53,19 +56,13 @@ const getTypeAnnotation = (node: any, expectedTypes: any[]) => {
   }
 
   if (t.isCallExpression(node)) {
+    // todo: construct new annotion type
     return identifiers[node.callee.name].typeAnnotation.typeAnnotation
       .returnType;
   }
 
   console.log(node);
   throw "Cannot get type annotation for node!";
-};
-
-const typeArrowFunctionExpression = node => {
-  if (!node.returnType) {
-    const bodyRetType = getTypeAnnotation(node.body);
-    node.returnType = t.typeAnnotation(bodyRetType);
-  }
 };
 
 export default babel => {
@@ -79,7 +76,6 @@ export default babel => {
       VariableDeclaration(path) {
         path.node.declarations.forEach(declaration => {
           if (!declaration.id.typeAnnotation) {
-            console.log(declaration);
             const initType = getTypeAnnotation(declaration.init);
             declaration.id.typeAnnotation = t.typeAnnotation(initType);
           }
